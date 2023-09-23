@@ -1,0 +1,26 @@
+{% extends 'youtube/base.html' %} {% block content %}
+<div class="card-group home">
+  {% for video in videos %}
+  <div class="card">
+    <a href="{% url 'video_detail' pk=video.pk %}">
+      <img class="thumbnail" src="{{video.thumbnail.url}}" />
+    </a>
+    <div class="description home">
+      <img class="icon" src="{{video.thumbnail.url}}" />
+      <div class="text">
+        <a class="title home" href="{% url 'video_detail' pk=video.pk %}">
+          <p>{{video.title}}</p>
+        </a>
+        <div class="detail home">
+          <p>hogehogeチャンネル</p>
+          <p>59万回視聴 {{ video.published_at|timesince }}前</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <div style="height: auto; flex-grow: 1">
+    <!--カードを左側に寄せる役-->
+  </div>
+</div>
+{% endblock %}

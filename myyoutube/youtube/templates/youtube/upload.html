@@ -1,0 +1,48 @@
+{% extends 'youtube/base.html' %} {% block content %}
+<div id="upload-page">
+  <div class="head upload">
+    <a href="{% url 'home' %}" class="material-symbols-outlined cancel-button"
+      >close</a
+    >
+    <h1>動画をアップロード</h1>
+  </div>
+  <div class="content upload">
+    <form enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <div class="forms">
+        <div class="input-container">
+          <label>タイトル</label>
+          <input name="title" type="text" />
+        </div>
+        <div class="input-container upload">
+          <label>概要</label>
+          <textarea name="description"></textarea>
+        </div>
+        <div class="input-container">
+          <label class="thumbnail-button">
+            <div class="material-symbols-outlined">add_photo_alternate</div>
+            サムネイルをアップロード
+            <input
+              id="thumbnail-input"
+              name="thumbnail"
+              type="file"
+              style="display: none"
+            />
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="upload">アップロードする</button>
+    </form>
+  </div>
+  <script>
+    const fileInput = document.getElementById("thumbnail-input");
+    fileInput.addEventListener("change", () => {
+      let thumbnailButton = document.querySelector(".thumbnail-button");
+      const thumbnailName = fileInput.files[0].name;
+      let new_element = document.createElement("p");
+      new_element.innerHTML = thumbnailName;
+      thumbnailButton.appendChild(new_element);
+    });
+  </script>
+</div>
+{% endblock %}
